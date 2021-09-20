@@ -7,6 +7,22 @@
 
 ## Maddy Emailserver
 
+## PostFix, DoveCot, Mysql, Spamassassin
+
+* https://www.cyberpunk.rs/mail-server-setup-postfix
+* https://www.linode.com/docs/guides/email-with-postfix-dovecot-and-mysql/
+* https://ixnfo.com/en/mail-server-postfix-dovecot-mysql.html
+* https://www.howtoforge.com/greylisting_postfix_postgrey
+* [DigitalOcean Email Setup Guide](https://www.digitalocean.com/community/tutorials/how-to-configure-a-mail-server-using-postfix-dovecot-mysql-and-spamassassin)
+
+## Postgrey [Greylisting](https://github.com/schweikert/postgrey)
+> Greylisting in short means that when someone wants to deliver a mail to your mail server it will simply reply -Please come back later-?. That is something all RFC-compliant mail servers do and when they do come back the mail is accepted. Most spammers and spam software are not compliant and not patient enough to try again. You will be surprised to see how effective this is. 
+> https://www.vpnreactor.com/greylisting-org-acquistion/
+
+## Email Client
+* [Server Maddy](https://brianlovin.com/hn/27557542)
+* [Client MailPile](https://www.mailpile.is)
+
 ## SFTP chroot
 
 ## Reverse Proxy
