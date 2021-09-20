@@ -1,4 +1,4 @@
-# Service We are going to implement
+# Services we are going to implement
 
 ## PowerDNS
 
