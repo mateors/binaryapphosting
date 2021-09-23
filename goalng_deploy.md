@@ -12,3 +12,7 @@ https://www.digitalocean.com/community/tutorials/how-to-deploy-a-go-web-applicat
 
 * https://clarusway.com/passwordless-usage-of-private-git-repositories/
 * https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token
+  
+ ## Golang system command
+* https://tutorialedge.net/golang/executing-system-commands-with-golang
+* https://zetcode.com/golang/exec-command/
