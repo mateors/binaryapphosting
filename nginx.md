@@ -63,3 +63,15 @@ Root, on the other hand is not a new path, it contains some information that has
 ![alias](https://i.stack.imgur.com/Oahx0.png)
 
 * https://stackoverflow.com/questions/10631933/nginx-static-file-serving-confusion-with-root-alias
+
+### Serving-static-content
+* https://docs.nginx.com/nginx/admin-guide/web-server/serving-static-content/
+* https://docs.nginx.com/nginx/admin-guide/web-server/web-server/
+*
+
+## Nginx Virtual Host
+
+* https://www.keycdn.com/support/nginx-virtual-host
+* https://www.digitalocean.com/community/tutorials/how-to-set-up-nginx-server-blocks-virtual-hosts-on-ubuntu-16-04
+* https://webautomation.io/pde/github-search-results-extractor/373/
+
