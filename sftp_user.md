@@ -41,6 +41,26 @@ chown automan /home/mastererp/automan.biz/www/
 ## verify everything set properly
 > cat /etc/passwd
   
+> SSHD Config file ``` /etc/ssh/sshd_config```
+> we need to set the following changes to the file
+  
+```
+# override default of no subsystems
+#Subsystem      sftp    /usr/libexec/openssh/sftp-server
+Subsystem sftp internal-sftp
+
+# For sftp user only
+ Match Group sftponly
+        PasswordAuthentication yes
+        ChrootDirectory %h
+        ForceCommand internal-sftp
+        X11Forwarding no
+        AllowTcpForwarding no
+```
+
+## Restart sshd service
+> service sshd restart
+  
 ## Reference
 * https://www.tecmint.com/restrict-sftp-user-home-directories-using-chroot
 * https://serverfault.com/questions/807074/enable-password-login-for-sftp-while-keeping-authentication-by-ssh-keys
