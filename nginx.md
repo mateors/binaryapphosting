@@ -74,4 +74,5 @@ Root, on the other hand is not a new path, it contains some information that has
 * https://www.keycdn.com/support/nginx-virtual-host
 * https://www.digitalocean.com/community/tutorials/how-to-set-up-nginx-server-blocks-virtual-hosts-on-ubuntu-16-04
 * https://webautomation.io/pde/github-search-results-extractor/373/
+* https://serverspace.io/support/help/nginx-virtual-hosts-on-ubuntu-20-04/
 
