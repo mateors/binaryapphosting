@@ -1,5 +1,8 @@
 # Golang File Manipulation
 
+> ssh root@74.208.181.199
+> QyxHKK*o8$
+
 * https://www.devdungeon.com/content/working-files-go
 
 * https://vorozhko.net/very-simple-grep-tool-in-go-search-substring-in-files
