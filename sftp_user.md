@@ -66,4 +66,5 @@ Subsystem sftp internal-sftp
 * https://serverfault.com/questions/807074/enable-password-login-for-sftp-while-keeping-authentication-by-ssh-keys
 * https://www.redhat.com/sysadmin/suid-sgid-sticky-bit
 * https://www.youtube.com/watch?v=DDCLmAodbPc
+* https://www.cyberciti.biz/faq/how-to-hide-files-and-directories-in-linux/
   
