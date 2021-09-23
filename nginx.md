@@ -53,5 +53,13 @@ In a way this makes sense. The alias just let's you define a new path to represe
 
 Root, on the other hand is not a new path, it contains some information that has to be collated with some other info to make the final path. And so, the location part is used, not dropped.
 
+## A picture is worth a thousand words
+```for root:```
+
+![root](https://i.stack.imgur.com/vCgqh.png)
+
+```for alias:```
+
+![alias](https://i.stack.imgur.com/Oahx0.png)
 
 * https://stackoverflow.com/questions/10631933/nginx-static-file-serving-confusion-with-root-alias
