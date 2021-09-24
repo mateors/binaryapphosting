@@ -47,6 +47,16 @@ easywebhoster.com
 ## What is reverse proxy?
 A reverse proxy is a server that sits in front of web servers and forwards client (e.g. web browser) requests to those web servers. Reverse proxies are typically implemented to help increase security, performance, and reliability. In order to better understand how a reverse proxy works and the benefits it can provide, let’s first define what a proxy server is.
 
+## What is a proxy server?
+> A forward proxy, often called a proxy, proxy server, or web proxy, is a server that sits in front of a group of client machines. When those computers make requests to sites and services on the Internet, the proxy server intercepts those requests and then communicates with web servers on behalf of those clients, like a middleman.
+
+![Proxy Server](https://www.cloudflare.com/img/learning/cdn/glossary/reverse-proxy/forward-proxy-flow.svg)
+
+### There are a few reasons one might want to use a forward proxy:
+* To avoid state or institutional browsing restrictions
+* To block access to certain content
+* To protect our identity online
+
 
 ## Reference
 * https://www.cloudflare.com/learning/cdn/glossary/reverse-proxy/
