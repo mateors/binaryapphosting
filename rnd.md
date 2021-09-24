@@ -15,22 +15,22 @@ mastrhost.com
 
 mpanel.org
 
-mastr.org
+**mastr.org**
 
 golanghost.org
 
-host.pro
+*host.pro*
 mstrhost
 
 easyhostingpanel.com
 hostingpanelservice.com
 hosting-master.net
 
-hostemaster.com
+### hostemaster.com
 
 hostmastr.com
 
-mastrhost.com
+**mastrhost.com**
 
 Host.Pro
 HOST.PRO
@@ -41,11 +41,8 @@ masterpanel.co
 servicepanel.org
 easywebhoster.com
 
-
-s5.csa2.acemsb3.com
-
-codewithmosh.activehosted.com
-https://codewithmosh.activehosted.com/admin/
+### codewithmosh.activehosted.com
+* [A Nice UI/UX](https://codewithmosh.activehosted.com/admin)
 
 ## What is reverse proxy?
 A reverse proxy is a server that sits in front of web servers and forwards client (e.g. web browser) requests to those web servers. Reverse proxies are typically implemented to help increase security, performance, and reliability. In order to better understand how a reverse proxy works and the benefits it can provide, let’s first define what a proxy server is.
