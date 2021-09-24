@@ -57,6 +57,20 @@ A reverse proxy is a server that sits in front of web servers and forwards clien
 * To block access to certain content
 * To protect our identity online
 
+## How is a reverse proxy different?
+A reverse proxy is a server that sits in front of one or more web servers, intercepting requests from clients. This is different from a forward proxy, where the proxy sits in front of the clients. With a reverse proxy, when clients send requests to the origin server of a website, those requests are intercepted at the network edge by the reverse proxy server. The reverse proxy server will then send requests to and receive responses from the origin server.
+
+The difference between a forward and reverse proxy is subtle but important. A simplified way to sum it up would be to say that a forward proxy sits in front of a client and ensures that no origin server ever communicates directly with that specific client. On the other hand, a reverse proxy sits in front of an origin server and ensures that no client ever communicates directly with that origin server.
+
+![Reverse_Proxy](https://www.cloudflare.com/img/learning/cdn/glossary/reverse-proxy/reverse-proxy-flow.svg)
+
+## Some of the benefits of a reverse proxy:
+* Load balancing
+* Protection from attacks 
+* Global Server Load Balancing (GSLB)- CDN
+* Caching
+* Freeing up valuable resources on the origin server (SSL encryption)
+
 
 ## Reference
 * https://www.cloudflare.com/learning/cdn/glossary/reverse-proxy/
