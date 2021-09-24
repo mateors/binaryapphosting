@@ -4,7 +4,6 @@ YunoHost is server operating system
 soser
 hoster
 
-
 serveroperatingsystem.com
 serveroperating.com
 serveros.net
@@ -16,7 +15,6 @@ mastrhost.com
 mpanel.org
 
 **mastr.org**
-
 golanghost.org
 
 *host.pro*
@@ -27,11 +25,9 @@ hostingpanelservice.com
 hosting-master.net
 
 ### hostemaster.com
-
 hostmastr.com
 
 **mastrhost.com**
-
 Host.Pro
 HOST.PRO
 
@@ -70,6 +66,11 @@ The difference between a forward and reverse proxy is subtle but important. A si
 * Global Server Load Balancing (GSLB)- CDN
 * Caching
 * Freeing up valuable resources on the origin server (SSL encryption)
+
+## How to implement reverse proxy by our own?
+* https://hackernoon.com/writing-a-reverse-proxy-in-just-one-line-with-go-c1edfa78c84b
+* https://developer20.com/writing-proxy-in-go/
+* https://blog.joshsoftware.com/2021/05/25/simple-and-powerful-reverseproxy-in-go/
 
 
 ## Reference
