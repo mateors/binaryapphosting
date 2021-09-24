@@ -6,6 +6,15 @@
 * Protocol attacks, and
 * Application layer attacks.
 
+## Following are the methods of doing DDoS attacks:
+* UDP flood
+* ICMP (Ping) flood
+* SYN flood
+* Ping of Death
+* Slowloris
+* NTP Amplification
+* HTTP flood
+
 
 ## Reference
 * https://www.alexedwards.net/blog/how-to-rate-limit-http-requests
