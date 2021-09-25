@@ -1,7 +1,5 @@
 # How to add sftp user in a linux system
 
-contabo::root:MR657GDREx
-
 ## How to create Group?
 > groupadd <groupName> \
 > groupadd sftponly
