@@ -22,6 +22,11 @@ if _, err = f.WriteString(text); err != nil {
 
 ```
 
+## Effective Go
+* https://golang.org/doc/effective_go
+
+> go doc -all
+
 
 ## Reference
 * https://about.sourcegraph.com/go/an-introduction-to-go-tool-trace-rhys-hiltner/
