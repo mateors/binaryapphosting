@@ -29,33 +29,33 @@ if _, err = f.WriteString(text); err != nil {
 
 ```golang
 
-type FileContent struct{
-	FileName string
-	Size int
-	ModeText string
+type FileContent struct {
+	fileName   string
+	FileSize   int64
+	ModeText   string
 	ModeNumber string
-	ModTime string
-	Content string
+	ModTime    string
+	Content    string
 }
 
 func (fc *FileContent) GetContent() string {
-   return fc.Content
+	return fc.Content
 }
 
-func (fc *FileContent) ModTime() string {
-   return fc.ModTime
+func (fc *FileContent) LastModified() string {
+	return fc.ModTime
 }
 
-func (fc *FileContent) FileName() string {
-   return fc.FileName
+func (fc *FileContent) Name() string {
+	return fc.fileName
 }
 
-func (fc *FileContent) ModeNumber() string {
-   return fc.ModeNumber
+func (fc *FileContent) Mode() string {
+	return fc.ModeNumber
 }
 
-func (fc *FileContent) Size() int {
-   return fc.Size
+func (fc *FileContent) Size() int64 {
+	return fc.FileSize
 }
 
 func GetFileContent(filePath string) (*FileContent, error) { 
@@ -78,11 +78,19 @@ func GetFileContent(filePath string) (*FileContent, error) {
 
 	timee := filestat.ModTime()
 	dateTime := timee.Format("2006-01-02 15:04:05")
-	fmt.Println(dateTime, "=>", timee)
+	//fmt.Println(dateTime, "=>", timee)
 
-	fileSize := filestat.Size()
-	fmt.Println(fileSize)
-	return string(data),nil
+	//fileSize := filestat.Size()
+	//fmt.Println(fileSize)
+	
+	return &FileContent{
+		fileName:   filestat.Name(),
+		FileSize:   filestat.Size(),
+		ModeText:   filestat.Mode().Perm().String(),
+		ModTime:    dateTime,
+		Content:    string(data),
+		ModeNumber: fmt.Sprintf("%04o", filestat.Mode().Perm()),
+	}, nil
 	
 }
 ```
