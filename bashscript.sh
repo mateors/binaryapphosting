@@ -2,4 +2,4 @@
 
 #echo $(ifconfig | grep broadcast | awk '{print $2}')
 
-echo "$(cat /etc/passwd | cut -d : -f 1)"
+echo "$(cat /etc/passwd | cut -d : -f 1 | grep rassel)"

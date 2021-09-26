@@ -6,12 +6,45 @@ import (
 	"errors"
 	"fmt"
 	"io"
+	"io/ioutil"
 	"log"
 	"os"
 	"os/exec"
+	"os/user"
 	"runtime"
+	"strconv"
 	"strings"
+	"time"
 )
+
+type FileContent struct {
+	fileName   string
+	FileSize   int64
+	ModeText   string
+	ModeNumber string
+	ModTime    string
+	Content    string
+}
+
+func (fc *FileContent) GetContent() string {
+	return fc.Content
+}
+
+func (fc *FileContent) LastModified() string {
+	return fc.ModTime
+}
+
+func (fc *FileContent) Name() string {
+	return fc.fileName
+}
+
+func (fc *FileContent) Mode() string {
+	return fc.ModeNumber
+}
+
+func (fc *FileContent) Size() int64 {
+	return fc.FileSize
+}
 
 func main() {
 
@@ -249,16 +282,167 @@ func main() {
 	// fmt.Println(string(bs), err)
 
 	//golang command pipeline example
-	var b bytes.Buffer
-	if err := Execute(&b,
-		exec.Command("cat", "/etc/passwd"),
-		exec.Command("cut", "-d", ":", "-f", "1"),
-		exec.Command("grep", "rassel"),
-	); err != nil {
-		log.Fatalln(err)
-	}
-	io.Copy(os.Stdout, &b)
+	timeStart := time.Now()
 
+	// var b bytes.Buffer
+	// if err := Execute(&b,
+	// 	exec.Command("cat", "/etc/passwd"),
+	// 	exec.Command("cut", "-d", ":", "-f", "1"),
+	// 	exec.Command("grep", "rassel"),
+	// ); err != nil {
+	// 	log.Fatalln(err)
+	// }
+	// //io.Copy(os.Stdout, &b)
+	// fmt.Println(b.String())
+
+	// bs, err := execCommand("bash bashscript.sh")
+	// ipaddr := strings.TrimSpace(string(bs))
+	// fmt.Println(ipaddr, len(ipaddr), err)
+
+	//err := os.Chown("/var/www/vhosts/automan.biz", 1001, 0)
+	//err := chown("/var/www/vhosts/automan.biz/www/", "automan")
+
+	// path := "/var/www/vhosts/automan.biz/www/"
+	// //err := chownRecursive("mostain", path)
+
+	// fs, err := os.Lstat(path)
+	// fmt.Println(fs.Mode())
+	// fmt.Printf("\n%04o\n", fs.Mode().Perm())
+
+	//File manipulation
+	fileName := "hello.txt"
+	// text := "This is a new text file with one line of text"
+	// err := FileCreateUpdate(fileName, text)
+
+	content, err := GetFileContent(fileName)
+
+	ms := time.Since(timeStart).Milliseconds()
+	fmt.Println(ms, content.GetContent(),
+		content.ModTime,
+		content.ModeText,
+		content.ModeNumber,
+		err)
+}
+
+func GetFileContent(filePath string) (*FileContent, error) {
+
+	//var fc FileContent{}
+
+	file, err := os.Open(filePath)
+	if err != nil {
+		return nil, err
+	}
+	defer file.Close()
+
+	//os.File
+	data, err := ioutil.ReadAll(file)
+	if err != nil {
+		return nil, err
+	}
+
+	//io.Copy(file,)
+
+	filestat, err := file.Stat()
+	if err != nil {
+		//fmt.Println("Could not able to get the file stat")
+		return nil, err
+	}
+
+	timee := filestat.ModTime()
+	dateTime := timee.Format("2006-01-02 15:04:05")
+	//fmt.Println(dateTime, "=>", timee)
+
+	//fileSize := filestat.Size()
+	//fmt.Println(string(data), fileSize)
+	// offset := fileSize - 1
+	// lastLineSize := 0
+	// fmt.Println(fileSize)
+
+	// for {
+	// 	b := make([]byte, 1)
+	// 	//fmt.Println(b, offset)
+	// 	n, err := file.ReadAt(b, offset)
+	// 	if err != nil {
+	// 		//fmt.Println("Error reading file ", err)
+	// 		fmt.Println("---", err.Error())
+	// 		break
+	// 	}
+	// 	char := string(b[0])
+	// 	fmt.Println(b, offset, "char:", char)
+	// 	if char == "\n" {
+	// 		fmt.Println(char, "break")
+	// 		break
+	// 	}
+	// 	offset--
+	// 	lastLineSize += n
+	// }
+
+	// lastLine := make([]byte, lastLineSize)
+	// _, err = file.ReadAt(lastLine, offset+1)
+	// if err != nil {
+	// 	//fmt.Println("Could not able to read last line with offset", offset, "and lastline size", lastLineSize)
+	// 	return err
+	// }
+	return &FileContent{
+		fileName:   filestat.Name(),
+		FileSize:   filestat.Size(),
+		ModeText:   filestat.Mode().Perm().String(),
+		ModTime:    dateTime,
+		Content:    string(data),
+		ModeNumber: fmt.Sprintf("%04o", filestat.Mode().Perm()),
+	}, nil
+}
+
+//FileCreate function will create file if not exist,
+//Otherwise it will append to the end of the file
+func FileCreateUpdate(fileName, text string) error {
+
+	//file, err := os.Open(fileName)
+	file, err := os.OpenFile(fileName, os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0644)
+	if err != nil {
+		return err
+	}
+	defer file.Close()
+
+	if _, err = file.WriteString(text); err != nil {
+		return err
+	}
+	return nil
+}
+
+func chownRecursive(username, path string) error {
+
+	if !checkIfRootLogin() {
+		return errors.New("only root user can execute")
+	}
+	cmd := fmt.Sprintf("chown -R %s:%s %s", username, username, path)
+	return ExecCommand(cmd)
+}
+
+func checkIfRootLogin() bool {
+	cu, _ := user.Current()
+	uid, _ := strconv.Atoi(cu.Uid)
+	return uid == 0
+}
+
+func chown(path, username string) error {
+
+	if !checkIfRootLogin() {
+		return errors.New("only root user allowed")
+	}
+
+	user, err := user.Lookup(username)
+	if err != nil {
+		return err
+	}
+	userID, _ := strconv.Atoi(user.Uid)
+	groupID, _ := strconv.Atoi(user.Gid)
+
+	err = os.Chown(path, userID, groupID) //-1
+	if err != nil {
+		return err
+	}
+	return nil
 }
 
 func userAdd(username, txtpassword string) {
@@ -291,16 +475,18 @@ func CreateRandom(n int) string {
 	return string(b)
 }
 
-func execCommand(command string) ([]byte, error) {
+//ExecCommand send command and receive error
+func ExecCommand(command string) error {
 
 	args := strings.Split(command, " ")
 	cmd := exec.Command(args[0], args[1:]...)
-	bs, err := cmd.CombinedOutput()
+	_, err := cmd.CombinedOutput()
 	if err != nil {
-		return []byte{}, err
+		//return []byte{}, err
+		return err
 	}
 	//response := string(bs)
-	return bs, nil
+	return nil
 }
 
 //commandExecute

@@ -47,3 +47,5 @@ chown -R automan /var/www/vhosts/automan.biz/
 * https://blog.kowalczyk.info/article/wOYk/advanced-command-execution-in-go-with-osexec.html
 * https://stackoverflow.com/questions/20895552/how-can-i-read-from-standard-input-in-the-console
 * https://stackoverflow.com/questions/14637979/how-to-permanently-set-path-on-linux-unix
+* https://stackoverflow.com/questions/10781516/how-to-pipe-several-commands-in-go
+* https://stackoverflow.com/questions/41932480/file-permission-mask-in-go
