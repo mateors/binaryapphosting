@@ -29,6 +29,7 @@ if _, err = f.WriteString(text); err != nil {
 
 ```golang
 
+func GetFileContent(filePath string) (string, error) { 
 	file, err := os.Open(filePath)
 	if err != nil {
 		return "", err
@@ -43,7 +44,6 @@ if _, err = f.WriteString(text); err != nil {
 
 	filestat, err := file.Stat()
 	if err != nil {
-		//fmt.Println("Could not able to get the file stat")
 		return "", err
 	}
 
@@ -52,7 +52,10 @@ if _, err = f.WriteString(text); err != nil {
 	fmt.Println(dateTime, "=>", timee)
 
 	fileSize := filestat.Size()
-	fmt.Println(string(data), fileSize)
+	fmt.Println(fileSize)
+	return string(data),nil
+	
+}
 ```
 
 ## Reference
