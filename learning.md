@@ -25,3 +25,4 @@ if _, err = f.WriteString(text); err != nil {
 
 ## Reference
 * https://about.sourcegraph.com/go/an-introduction-to-go-tool-trace-rhys-hiltner/
+* https://stackoverflow.com/questions/7151261/append-to-a-file-in-go
