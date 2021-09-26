@@ -29,6 +29,17 @@ if _, err = f.WriteString(text); err != nil {
 
 ```golang
 
+type FileContent struct{
+
+	FileName string
+	Size int
+	ModeText string
+	ModeNumber string
+	ModTime string
+	Content string
+
+}
+
 func GetFileContent(filePath string) (string, error) { 
 	file, err := os.Open(filePath)
 	if err != nil {
