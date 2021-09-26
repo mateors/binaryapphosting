@@ -30,14 +30,17 @@ if _, err = f.WriteString(text); err != nil {
 ```golang
 
 type FileContent struct{
-
 	FileName string
 	Size int
 	ModeText string
 	ModeNumber string
 	ModTime string
 	Content string
+}
 
+func (fc *FileContent) GetContent() *FileContent {
+
+   return fc
 }
 
 func GetFileContent(filePath string) (string, error) { 
