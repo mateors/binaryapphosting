@@ -27,6 +27,33 @@ if _, err = f.WriteString(text); err != nil {
 
 > go doc -all
 
+```golang
+
+	file, err := os.Open(filePath)
+	if err != nil {
+		return "", err
+	}
+	defer file.Close()
+
+	//os.File
+	data, err := ioutil.ReadAll(file)
+	if err != nil {
+		return "", err
+	}
+
+	filestat, err := file.Stat()
+	if err != nil {
+		//fmt.Println("Could not able to get the file stat")
+		return "", err
+	}
+
+	timee := filestat.ModTime()
+	dateTime := timee.Format("2006-01-02 15:04:05")
+	fmt.Println(dateTime, "=>", timee)
+
+	fileSize := filestat.Size()
+	fmt.Println(string(data), fileSize)
+```
 
 ## Reference
 * https://about.sourcegraph.com/go/an-introduction-to-go-tool-trace-rhys-hiltner/
