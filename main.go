@@ -180,7 +180,14 @@ func main() {
 	// fmt.Println("ERR:", stderr.String())
 
 	//userAdd("automan", "test123")
-	fmt.Println(execCommand("groupadd sftponly"))
+	// bs, err := execCommand("groupadd sftponly")
+	// fmt.Println(bs, err)
+
+	// bs, err := execCommand("usermod -G sftponly automan")
+	// fmt.Println(bs, err)
+
+	bs, err := execCommand("mkdir -p /var/www/vhosts/automan.biz/www2")
+	fmt.Println(bs, err)
 }
 
 func userAdd(username, txtpassword string) {
@@ -213,16 +220,16 @@ func CreateRandom(n int) string {
 	return string(b)
 }
 
-func execCommand(command string) (string, error) {
+func execCommand(command string) ([]byte, error) {
 
 	args := strings.Split(command, " ")
 	cmd := exec.Command(args[0], args[1:]...)
 	bs, err := cmd.CombinedOutput()
 	if err != nil {
-		return "", err
+		return []byte{}, err
 	}
-	response := string(bs)
-	return response, nil
+	//response := string(bs)
+	return bs, nil
 }
 
 //commandExecute
@@ -239,8 +246,7 @@ func commandExecute(command string) (string, error) {
 	var stdoutBuf, stderrBuf bytes.Buffer
 	cmd.Stdout = io.MultiWriter(os.Stdout, &stdoutBuf)
 	cmd.Stderr = io.MultiWriter(os.Stderr, &stderrBuf)
-
-	fmt.Println("**", stdoutBuf.String())
+	//fmt.Println("**", stdoutBuf.String())
 
 	cmd.StdinPipe()
 
