@@ -38,12 +38,27 @@ type FileContent struct{
 	Content string
 }
 
-func (fc *FileContent) GetContent() *FileContent {
-
-   return fc
+func (fc *FileContent) GetContent() string {
+   return fc.Content
 }
 
-func GetFileContent(filePath string) (string, error) { 
+func (fc *FileContent) ModTime() string {
+   return fc.ModTime
+}
+
+func (fc *FileContent) FileName() string {
+   return fc.FileName
+}
+
+func (fc *FileContent) ModeNumber() string {
+   return fc.ModeNumber
+}
+
+func (fc *FileContent) Size() int {
+   return fc.Size
+}
+
+func GetFileContent(filePath string) (*FileContent, error) { 
 	file, err := os.Open(filePath)
 	if err != nil {
 		return "", err
