@@ -38,6 +38,10 @@ chown -R automan /var/www/vhosts/automan.biz/
 > It will automatically update your path for the remainder of the session. \
 > source ~/.profile
 
+
+## Linux Pipe in golang
+* https://stackoverflow.com/questions/10781516/how-to-pipe-several-commands-in-go
+
 ## Reference
 * https://stackoverflow.com/questions/19649772/what-is-github-compare-pull-request
 * https://blog.kowalczyk.info/article/wOYk/advanced-command-execution-in-go-with-osexec.html

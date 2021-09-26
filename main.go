@@ -186,8 +186,66 @@ func main() {
 	// bs, err := execCommand("usermod -G sftponly automan")
 	// fmt.Println(bs, err)
 
-	bs, err := execCommand("mkdir -p /var/www/vhosts/automan.biz/www2")
-	fmt.Println(bs, err)
+	// bs, err := execCommand("mkdir -p /var/www/vhosts/automan.biz/www2")
+	// fmt.Println(bs, err)
+
+	//user info
+	// cu, err := user.Current()
+	// fmt.Println(cu.Name, cu.Username, cu.Uid, cu.Gid, cu.HomeDir, err)
+
+	//os ==> user function
+	// uinfo, err := user.Lookup("automan")
+	// fmt.Println(uinfo.Username, uinfo.Gid, uinfo.Uid, uinfo.HomeDir, err)
+
+	// ug, err := user.LookupGroupId(uinfo.Gid)
+	// fmt.Println(ug.Name, ug.Name, err)
+
+	// ginfo, err := user.LookupGroup("sftponly")
+	// fmt.Println(ginfo.Name, ginfo.Gid, err)
+
+	// kevin:x:1005:1006::/home/kevin:/usr/bin/zsh
+	// line := "kevin:x:1005:1006::/home/kevin:/usr/bin/zsh"
+	// parts := strings.SplitN(string(line), ":", 8)
+	// fmt.Println(parts, len(parts))
+
+	// username := "automan"
+	// nameC := make([]byte, len(username)+1)
+	// copy(nameC, username)
+	// fmt.Println(nameC)
+
+	// fmt.Println(syscall.Getuid())
+	// val, isFound := syscall.Getenv("PATH")
+	// fmt.Println(val, isFound)
+
+	// err = os.Mkdir("test", os.FileMode(0775))
+	// fmt.Println(err)
+	// uid, _ := strconv.Atoi(uinfo.Uid)
+	// gid, _ := strconv.Atoi(uinfo.Gid)
+	// err = os.Chown("test", uid, gid)
+	// fmt.Println(err)
+
+	// if err := syscall.Setuid(1001); err != nil {
+	// 	fmt.Printf("%v\n", err)
+	// }
+
+	// cmd := exec.Command("mkdir", "rassel")
+	// cmd.SysProcAttr = &syscall.SysProcAttr{}
+	// cmd.SysProcAttr.Credential = &syscall.Credential{Uid: 0, Gid: 0}
+	// bs, err := cmd.CombinedOutput()
+	// if err != nil {
+	// 	fmt.Println(err.Error())
+	// }
+	// fmt.Println("Result:", string(bs))
+
+	//execute bash command
+	// bs, err := execCommand("bash bashscript.sh")
+	// ipaddr := strings.TrimSpace(string(bs))
+	// fmt.Println(ipaddr, len(ipaddr), err)
+
+	//cat /etc/passwd | cut -d: -f 1
+	bs, err := execCommand("bash -c cat /etc/passwd | cut -d : -f 1")
+	fmt.Println(string(bs), err)
+
 }
 
 func userAdd(username, txtpassword string) {
