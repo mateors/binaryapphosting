@@ -6,8 +6,6 @@ import (
 	"errors"
 	"fmt"
 	"io"
-	"io/fs"
-	"io/ioutil"
 	"log"
 	"os"
 	"os/exec"
@@ -15,33 +13,9 @@ import (
 	"runtime"
 	"strconv"
 	"strings"
+
+	"github.com/mateors/mfile"
 )
-
-type FileContent struct {
-	Content  string
-	FileInfo fs.FileInfo
-}
-
-func (fc *FileContent) LastModified() string {
-
-	filestat := fc.FileInfo
-	timee := filestat.ModTime()
-	dateTime := timee.Format("2006-01-02 15:04:05")
-	return dateTime
-}
-
-func (fc *FileContent) ModeN() string {
-
-	filestat := fc.FileInfo
-	modeNumeric := fmt.Sprintf("%04o", filestat.Mode().Perm())
-	return modeNumeric
-}
-
-func (fc *FileContent) ModeT() string {
-
-	filestat := fc.FileInfo
-	return filestat.Mode().String()
-}
 
 func main() {
 
@@ -52,7 +26,7 @@ func main() {
 	// err := FileCreateUpdate(fileName, text)
 
 	fileName := "hello.txt"
-	content, err := GetFileContent(fileName)
+	content, err := mfile.GetFileContent(fileName)
 	fmt.Println(err)
 	fmt.Println(content.Content)
 	fmt.Println(content.FileInfo.Size())
@@ -66,27 +40,6 @@ func main() {
 	// 	content.ModeText,
 	// 	content.ModeNumber,
 	// 	err)
-}
-
-func GetFileContent(filePath string) (*FileContent, error) {
-
-	file, err := os.Open(filePath)
-	if err != nil {
-		return nil, err
-	}
-	defer file.Close()
-
-	//os.File
-	data, err := ioutil.ReadAll(file)
-	if err != nil {
-		return nil, err
-	}
-
-	fileInfo, err := file.Stat()
-	if err != nil {
-		return nil, err
-	}
-	return &FileContent{Content: string(data), FileInfo: fileInfo}, nil
 }
 
 //FileCreate function will create file if not exist,

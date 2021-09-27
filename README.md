@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # OS Command Execution and Gets the output
 
 https://stackoverflow.com/questions/24095661/os-exec-sudo-command-in-go/24095983#24095983
@@ -97,4 +96,3 @@ chown -R automan /var/www/vhosts/automan.biz/
 * [PION](https://github.com/pion/webrtc)
 * [ION](https://github.com/pion/ion)
 * [Learn WebRTC](https://webrtcforthecurious.com)
->>>>>>> origin/main
