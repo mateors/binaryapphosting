@@ -14,383 +14,119 @@ import (
 	"runtime"
 	"strconv"
 	"strings"
-	"time"
 )
 
 type FileContent struct {
-	fileName   string
-	FileSize   int64
-	ModeText   string
-	ModeNumber string
-	ModTime    string
-	Content    string
+	FilePointer *os.File
 }
 
 func (fc *FileContent) GetContent() string {
-	return fc.Content
+
+	file := fc.FilePointer
+	data, err := ioutil.ReadAll(file)
+	if err != nil {
+		fmt.Println(err.Error())
+		return ""
+	}
+	return string(data)
 }
 
 func (fc *FileContent) LastModified() string {
-	return fc.ModTime
+
+	file := fc.FilePointer
+	filestat, err := file.Stat()
+	if err != nil {
+		return ""
+	}
+	timee := filestat.ModTime()
+	dateTime := timee.Format("2006-01-02 15:04:05")
+	return dateTime
 }
 
 func (fc *FileContent) Name() string {
-	return fc.fileName
+
+	file := fc.FilePointer
+	filestat, err := file.Stat()
+	if err != nil {
+		return ""
+	}
+	return filestat.Name()
 }
 
-func (fc *FileContent) Mode() string {
-	return fc.ModeNumber
+func (fc *FileContent) ModeN() string {
+	file := fc.FilePointer
+	filestat, err := file.Stat()
+	if err != nil {
+		return ""
+	}
+	modeNumeric := fmt.Sprintf("%04o", filestat.Mode().Perm())
+	return modeNumeric
+}
+
+func (fc *FileContent) ModeT() string {
+	file := fc.FilePointer
+	filestat, err := file.Stat()
+	if err != nil {
+		return ""
+	}
+	return filestat.Mode().String()
 }
 
 func (fc *FileContent) Size() int64 {
-	return fc.FileSize
+
+	file := fc.FilePointer
+	filestat, err := file.Stat()
+	if err != nil {
+		return 0
+	}
+	return filestat.Size()
 }
 
 func main() {
 
-	// Reference
-	//(https://blog.kowalczyk.info/article/wOYk/advanced-command-execution-in-go-with-osexec.html)
-
-	//step-1
-	// cmd := exec.Command("ls", "-lah")
-	// if runtime.GOOS == "windows" {
-	// 	cmd = exec.Command("tasklist")
-	// }
-	// err := cmd.Run()
-	// if err != nil {
-	// 	log.Fatalf("cmd.Run() failed with %s\n", err)
-	// }
-
-	//step-2
-	// cmd := exec.Command("ls", "-lah")
-	// cmd.Stdout = os.Stdout
-	// cmd.Stderr = os.Stderr
-	// err := cmd.Run()
-	// if err != nil {
-	// 	log.Fatalf("cmd.Run() failed with %s\n", err)
-	// }
-
-	//step - 2 (modified)
-	// var b bytes.Buffer
-	// cmd := exec.Command("ls", "-lah")
-	// cmd.Stdout = &b
-	// cmd.Stderr = &b
-	// err := cmd.Run()
-	// if err != nil {
-	// 	log.Fatalf("cmd.Run() failed with %s\n", err)
-	// }
-	// bs := b.Bytes()
-	// fmt.Println(string(bs))
-
-	//step-3
-	// cmd := exec.Command("ls", "-lah")
-	// out, err := cmd.CombinedOutput()
-	// if err != nil {
-	// 	log.Fatalf("cmd.Run() failed with %s\n", err)
-	// }
-	// fmt.Printf("combined out:\n%s\n", string(out))
-
-	//data, err := ioutil.ReadAll(os.Stdin)
-	// data, err := io.ReadAll(os.Stdin)
-	// fmt.Println(data, err)
-
-	// reader := bufio.NewReader(os.Stdin)
-	// fmt.Print("Enter text: ")
-	// text, _ := reader.ReadString('\n')
-	// fmt.Println(text)
-
-	//Step-4: Capture stdout and stderr separately
-	// bs, err := exec.Command("lscpu").Output()
-	// fmt.Println(string(bs), err)
-
-	//step-5
-	// cmd := exec.Command("lscpu")
-	// var stdout, stderr bytes.Buffer
-	// cmd.Stdout = &stdout
-	// cmd.Stderr = &stderr
-	// err := cmd.Run()
-	// if err != nil {
-	// 	log.Fatalf("cmd.Run() failed with %s\n", err)
-	// }
-	// outStr, errStr := string(stdout.Bytes()), string(stderr.Bytes())
-	// fmt.Printf("out:\n%s\nerr:\n%s\n", outStr, errStr)
-
-	//Step-6
-	//Capture output but also show progress
-	// cmd := exec.Command("sudo", "apt", "update")
-
-	// var stdout, stderr []byte
-	// var errStdout, errStderr error
-	// stdoutIn, _ := cmd.StdoutPipe()
-	// stderrIn, _ := cmd.StderrPipe()
-	// err := cmd.Start()
-	// if err != nil {
-	// 	log.Fatalf("cmd.Start() failed with '%s'\n", err)
-	// }
-
-	// // cmd.Wait() should be called only after we finish reading
-	// // from stdoutIn and stderrIn.
-	// // wg ensures that we finish
-	// var wg sync.WaitGroup
-	// wg.Add(1)
-	// go func() {
-	// 	stdout, errStdout = copyAndCapture(os.Stdout, stdoutIn)
-	// 	wg.Done()
-	// }()
-
-	// stderr, errStderr = copyAndCapture(os.Stderr, stderrIn)
-
-	// wg.Wait()
-
-	// err = cmd.Wait()
-	// if err != nil {
-	// 	log.Fatalf("cmd.Run() failed with %s\n", err)
-	// }
-	// if errStdout != nil || errStderr != nil {
-	// 	log.Fatal("failed to capture stdout or stderr\n")
-	// }
-	// outStr, errStr := string(stdout), string(stderr)
-	// fmt.Printf("\nout:\n%s\nerr:\n%s\n", outStr, errStr)
-
-	//Step-7
-	// var command string = "sudo apt update"
-	// args := strings.Split(command, " ")
-	// //fmt.Println(args[0], args[1:]...)
-	// //cmd := exec.Command("sudo", "apt", "update")
-	// cmd := exec.Command(args[0], args[1:]...)
-	// if runtime.GOOS == "windows" {
-	// 	cmd = exec.Command("tasklist")
-	// }
-
-	// var stdoutBuf, stderrBuf bytes.Buffer
-	// cmd.Stdout = io.MultiWriter(os.Stdout, &stdoutBuf)
-	// cmd.Stderr = io.MultiWriter(os.Stderr, &stderrBuf)
-
-	// err := cmd.Run()
-	// if err != nil {
-	// 	log.Fatalf("cmd.Run() failed with %s\n", err)
-	// }
-	// outStr, errStr := string(stdoutBuf.Bytes()), string(stderrBuf.Bytes())
-	// fmt.Printf("\nout:\n%s\nerr:\n%s\n", outStr, errStr)
-
-	// fmt.Println(os.Environ(), len(os.Environ()))
-	// for i, v := range os.Environ() {
-	// 	fmt.Println(i, v)
-	// }
-
-	//fmt.Println(os.Getenv("USERNAME"))
-
-	// path, err := exec.LookPath("useradd")
-	// if err != nil {
-	// 	fmt.Printf("Error: %s\n", err.Error())
-	// } else {
-	// 	fmt.Printf("'ls' executable is in '%s'\n", path)
-	// }
-
-	//useradd automan
-	// res, err := commandExecute("sudo apt update")
-	// fmt.Println(">>", res, err)
-
-	//trial
-	// cmd := exec.Command("cat")
-
-	//***
-	// res, err := commandExecute("sudo useradd automan")
-	// fmt.Println(">>", res, err)
-
-	// cmd := exec.Command("openssl", "passwd", "-1")
-	// //cmd := exec.Command("sudo", "apt", "update")
-	// var stdin, stdout, stderr bytes.Buffer
-	// cmd.Stdout = &stdout
-	// cmd.Stderr = &stderr
-	// cmd.Stdin = &stdin
-
-	// err := cmd.Run()
-	// if err != nil {
-	// 	log.Fatalf("cmd.Run() failed with %s\n", err)
-	// }
-	// fmt.Println("IN:", stdin.String())
-	// fmt.Println("OUT:", stdout.String())
-	// fmt.Println("ERR:", stderr.String())
-
-	//userAdd("automan", "test123")
-	// bs, err := execCommand("groupadd sftponly")
-	// fmt.Println(bs, err)
-
-	// bs, err := execCommand("usermod -G sftponly automan")
-	// fmt.Println(bs, err)
-
-	// bs, err := execCommand("mkdir -p /var/www/vhosts/automan.biz/www2")
-	// fmt.Println(bs, err)
-
-	//user info
-	// cu, err := user.Current()
-	// fmt.Println(cu.Name, cu.Username, cu.Uid, cu.Gid, cu.HomeDir, err)
-
-	//os ==> user function
-	// uinfo, err := user.Lookup("automan")
-	// fmt.Println(uinfo.Username, uinfo.Gid, uinfo.Uid, uinfo.HomeDir, err)
-
-	// ug, err := user.LookupGroupId(uinfo.Gid)
-	// fmt.Println(ug.Name, ug.Name, err)
-
-	// ginfo, err := user.LookupGroup("sftponly")
-	// fmt.Println(ginfo.Name, ginfo.Gid, err)
-
-	// kevin:x:1005:1006::/home/kevin:/usr/bin/zsh
-	// line := "kevin:x:1005:1006::/home/kevin:/usr/bin/zsh"
-	// parts := strings.SplitN(string(line), ":", 8)
-	// fmt.Println(parts, len(parts))
-
-	// username := "automan"
-	// nameC := make([]byte, len(username)+1)
-	// copy(nameC, username)
-	// fmt.Println(nameC)
-
-	// fmt.Println(syscall.Getuid())
-	// val, isFound := syscall.Getenv("PATH")
-	// fmt.Println(val, isFound)
-
-	// err = os.Mkdir("test", os.FileMode(0775))
-	// fmt.Println(err)
-	// uid, _ := strconv.Atoi(uinfo.Uid)
-	// gid, _ := strconv.Atoi(uinfo.Gid)
-	// err = os.Chown("test", uid, gid)
-	// fmt.Println(err)
-
-	// if err := syscall.Setuid(1001); err != nil {
-	// 	fmt.Printf("%v\n", err)
-	// }
-
-	// cmd := exec.Command("mkdir", "rassel")
-	// cmd.SysProcAttr = &syscall.SysProcAttr{}
-	// cmd.SysProcAttr.Credential = &syscall.Credential{Uid: 0, Gid: 0}
-	// bs, err := cmd.CombinedOutput()
-	// if err != nil {
-	// 	fmt.Println(err.Error())
-	// }
-	// fmt.Println("Result:", string(bs))
-
-	//execute bash command
-	// bs, err := execCommand("bash bashscript.sh")
-	// ipaddr := strings.TrimSpace(string(bs))
-	// fmt.Println(ipaddr, len(ipaddr), err)
-
-	//cat /etc/passwd | cut -d: -f 1
-
-	// bs, err := execCommand("bash -c cat /etc/passwd") //cut -d : -f 1
-	// fmt.Println(string(bs), err)
-
-	//golang command pipeline example
-	timeStart := time.Now()
-
-	// var b bytes.Buffer
-	// if err := Execute(&b,
-	// 	exec.Command("cat", "/etc/passwd"),
-	// 	exec.Command("cut", "-d", ":", "-f", "1"),
-	// 	exec.Command("grep", "rassel"),
-	// ); err != nil {
-	// 	log.Fatalln(err)
-	// }
-	// //io.Copy(os.Stdout, &b)
-	// fmt.Println(b.String())
-
-	// bs, err := execCommand("bash bashscript.sh")
-	// ipaddr := strings.TrimSpace(string(bs))
-	// fmt.Println(ipaddr, len(ipaddr), err)
-
-	//err := os.Chown("/var/www/vhosts/automan.biz", 1001, 0)
-	//err := chown("/var/www/vhosts/automan.biz/www/", "automan")
-
-	// path := "/var/www/vhosts/automan.biz/www/"
-	// //err := chownRecursive("mostain", path)
-
-	// fs, err := os.Lstat(path)
-	// fmt.Println(fs.Mode())
-	// fmt.Printf("\n%04o\n", fs.Mode().Perm())
+	//timeStart := time.Now()
 
 	//File manipulation
-	fileName := "hello.txt"
 	// text := "This is a new text file with one line of text"
 	// err := FileCreateUpdate(fileName, text)
 
+	fileName := "hello.txt"
 	content, err := GetFileContent(fileName)
+	fmt.Println(err)
+	fmt.Println(content.GetContent())
 
-	ms := time.Since(timeStart).Milliseconds()
-	fmt.Println(ms, content.GetContent(),
-		content.ModTime,
-		content.ModeText,
-		content.ModeNumber,
-		err)
+	// ms := time.Since(timeStart).Milliseconds()
+	// fmt.Println(ms, content.GetContent(),
+	// 	content.ModTime,
+	// 	content.ModeText,
+	// 	content.ModeNumber,
+	// 	err)
 }
 
 func GetFileContent(filePath string) (*FileContent, error) {
-
-	//var fc FileContent{}
 
 	file, err := os.Open(filePath)
 	if err != nil {
 		return nil, err
 	}
-	defer file.Close()
+	//defer file.Close()
 
 	//os.File
-	data, err := ioutil.ReadAll(file)
-	if err != nil {
-		return nil, err
-	}
-
-	//io.Copy(file,)
-
-	filestat, err := file.Stat()
-	if err != nil {
-		//fmt.Println("Could not able to get the file stat")
-		return nil, err
-	}
-
-	timee := filestat.ModTime()
-	dateTime := timee.Format("2006-01-02 15:04:05")
-	//fmt.Println(dateTime, "=>", timee)
-
-	//fileSize := filestat.Size()
-	//fmt.Println(string(data), fileSize)
-	// offset := fileSize - 1
-	// lastLineSize := 0
-	// fmt.Println(fileSize)
-
-	// for {
-	// 	b := make([]byte, 1)
-	// 	//fmt.Println(b, offset)
-	// 	n, err := file.ReadAt(b, offset)
-	// 	if err != nil {
-	// 		//fmt.Println("Error reading file ", err)
-	// 		fmt.Println("---", err.Error())
-	// 		break
-	// 	}
-	// 	char := string(b[0])
-	// 	fmt.Println(b, offset, "char:", char)
-	// 	if char == "\n" {
-	// 		fmt.Println(char, "break")
-	// 		break
-	// 	}
-	// 	offset--
-	// 	lastLineSize += n
-	// }
-
-	// lastLine := make([]byte, lastLineSize)
-	// _, err = file.ReadAt(lastLine, offset+1)
+	// data, err := ioutil.ReadAll(file)
 	// if err != nil {
-	// 	//fmt.Println("Could not able to read last line with offset", offset, "and lastline size", lastLineSize)
-	// 	return err
+	// 	return nil, err
 	// }
-	return &FileContent{
-		fileName:   filestat.Name(),
-		FileSize:   filestat.Size(),
-		ModeText:   filestat.Mode().Perm().String(),
-		ModTime:    dateTime,
-		Content:    string(data),
-		ModeNumber: fmt.Sprintf("%04o", filestat.Mode().Perm()),
-	}, nil
+
+	// filestat, err := file.Stat()
+	// if err != nil {
+
+	// 	return nil, err
+	// }
+
+	//timee := filestat.ModTime()
+	//dateTime := timee.Format("2006-01-02 15:04:05")
+
+	return &FileContent{FilePointer: file}, nil
 }
 
 //FileCreate function will create file if not exist,
