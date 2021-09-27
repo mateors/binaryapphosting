@@ -1,0 +1,121 @@
+
+type FileContent struct {
+
+	// swagger:ignore
+	fileName string
+	FileSize int64
+	ModeText string
+
+	// swagger:ignore
+	ModeNumber string
+
+	ModTime string
+	Content string
+
+	sync.RWMutex `json:"-"`
+}
+
+func (fc *FileContent) GetContent() string {
+
+	fc.RLock()
+	defer fc.RUnlock()
+	return fc.Content
+}
+
+func (fc *FileContent) LastModified() string {
+	return fc.ModTime
+}
+
+func (fc *FileContent) Name() string {
+	return fc.fileName
+}
+
+func (fc *FileContent) Mode() string {
+	return fc.ModeNumber
+}
+
+func (fc *FileContent) Size() int64 {
+	return fc.FileSize
+}
+
+func GetFileContent(filePath string) (*FileContent, error) {
+
+	//var fc FileContent{}
+
+	file, err := os.Open(filePath)
+	if err != nil {
+		return nil, err
+	}
+	defer file.Close()
+
+	//os.File
+	data, err := ioutil.ReadAll(file)
+	if err != nil {
+		return nil, err
+	}
+
+	//io.Copy(file,)
+
+	filestat, err := file.Stat()
+	if err != nil {
+		//fmt.Println("Could not able to get the file stat")
+		return nil, err
+	}
+
+	timee := filestat.ModTime()
+	dateTime := timee.Format("2006-01-02 15:04:05")
+	//fmt.Println(dateTime, "=>", timee)
+
+	//fileSize := filestat.Size()
+	//fmt.Println(string(data), fileSize)
+	// offset := fileSize - 1
+	// lastLineSize := 0
+	// fmt.Println(fileSize)
+
+	// for {
+	// 	b := make([]byte, 1)
+	// 	//fmt.Println(b, offset)
+	// 	n, err := file.ReadAt(b, offset)
+	// 	if err != nil {
+	// 		//fmt.Println("Error reading file ", err)
+	// 		fmt.Println("---", err.Error())
+	// 		break
+	// 	}
+	// 	char := string(b[0])
+	// 	fmt.Println(b, offset, "char:", char)
+	// 	if char == "\n" {
+	// 		fmt.Println(char, "break")
+	// 		break
+	// 	}
+	// 	offset--
+	// 	lastLineSize += n
+	// }
+
+	// lastLine := make([]byte, lastLineSize)
+	// _, err = file.ReadAt(lastLine, offset+1)
+	// if err != nil {
+	// 	//fmt.Println("Could not able to read last line with offset", offset, "and lastline size", lastLineSize)
+	// 	return err
+	// }
+	return &FileContent{
+		fileName:   filestat.Name(),
+		FileSize:   filestat.Size(),
+		ModeText:   filestat.Mode().Perm().String(),
+		ModTime:    dateTime,
+		Content:    string(data),
+		ModeNumber: fmt.Sprintf("%04o", filestat.Mode().Perm()),
+	}, nil
+}
+
+//How do we call?
+
+	fileName := "hello.txt"
+	content, err := GetFileContent(fileName)
+	fmt.Println(content.Content)
+
+	ms := time.Since(timeStart).Milliseconds()
+	fmt.Println(ms, content.GetContent(),
+		content.ModTime,
+		content.ModeText,
+		content.ModeNumber,
+		err)
