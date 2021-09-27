@@ -6,6 +6,7 @@ import (
 	"errors"
 	"fmt"
 	"io"
+	"io/fs"
 	"io/ioutil"
 	"log"
 	"os"
@@ -17,69 +18,29 @@ import (
 )
 
 type FileContent struct {
-	FilePointer *os.File
-}
-
-func (fc *FileContent) GetContent() string {
-
-	file := fc.FilePointer
-	data, err := ioutil.ReadAll(file)
-	if err != nil {
-		fmt.Println(err.Error())
-		return ""
-	}
-	return string(data)
+	Content  string
+	FileInfo fs.FileInfo
 }
 
 func (fc *FileContent) LastModified() string {
 
-	file := fc.FilePointer
-	filestat, err := file.Stat()
-	if err != nil {
-		return ""
-	}
+	filestat := fc.FileInfo
 	timee := filestat.ModTime()
 	dateTime := timee.Format("2006-01-02 15:04:05")
 	return dateTime
 }
 
-func (fc *FileContent) Name() string {
-
-	file := fc.FilePointer
-	filestat, err := file.Stat()
-	if err != nil {
-		return ""
-	}
-	return filestat.Name()
-}
-
 func (fc *FileContent) ModeN() string {
-	file := fc.FilePointer
-	filestat, err := file.Stat()
-	if err != nil {
-		return ""
-	}
+
+	filestat := fc.FileInfo
 	modeNumeric := fmt.Sprintf("%04o", filestat.Mode().Perm())
 	return modeNumeric
 }
 
 func (fc *FileContent) ModeT() string {
-	file := fc.FilePointer
-	filestat, err := file.Stat()
-	if err != nil {
-		return ""
-	}
+
+	filestat := fc.FileInfo
 	return filestat.Mode().String()
-}
-
-func (fc *FileContent) Size() int64 {
-
-	file := fc.FilePointer
-	filestat, err := file.Stat()
-	if err != nil {
-		return 0
-	}
-	return filestat.Size()
 }
 
 func main() {
@@ -93,7 +54,11 @@ func main() {
 	fileName := "hello.txt"
 	content, err := GetFileContent(fileName)
 	fmt.Println(err)
-	fmt.Println(content.GetContent())
+	fmt.Println(content.Content)
+	fmt.Println(content.FileInfo.Size())
+	fmt.Println(content.ModeT())
+	fmt.Println(content.ModeN())
+	fmt.Println(content.LastModified())
 
 	// ms := time.Since(timeStart).Milliseconds()
 	// fmt.Println(ms, content.GetContent(),
@@ -109,24 +74,19 @@ func GetFileContent(filePath string) (*FileContent, error) {
 	if err != nil {
 		return nil, err
 	}
-	//defer file.Close()
+	defer file.Close()
 
 	//os.File
-	// data, err := ioutil.ReadAll(file)
-	// if err != nil {
-	// 	return nil, err
-	// }
+	data, err := ioutil.ReadAll(file)
+	if err != nil {
+		return nil, err
+	}
 
-	// filestat, err := file.Stat()
-	// if err != nil {
-
-	// 	return nil, err
-	// }
-
-	//timee := filestat.ModTime()
-	//dateTime := timee.Format("2006-01-02 15:04:05")
-
-	return &FileContent{FilePointer: file}, nil
+	fileInfo, err := file.Stat()
+	if err != nil {
+		return nil, err
+	}
+	return &FileContent{Content: string(data), FileInfo: fileInfo}, nil
 }
 
 //FileCreate function will create file if not exist,
@@ -140,7 +100,7 @@ func FileCreateUpdate(fileName, text string) error {
 	}
 	defer file.Close()
 
-	if _, err = file.WriteString(text); err != nil {
+	if _, err = file.WriteString("\n" + text); err != nil {
 		return err
 	}
 	return nil

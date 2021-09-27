@@ -1,0 +1,76 @@
+type FileContent struct {
+	FilePointer *os.File
+}
+
+func (fc *FileContent) GetContent() string {
+
+	file := fc.FilePointer
+	data, err := ioutil.ReadAll(file)
+	if err != nil {
+		fmt.Println(err.Error())
+		return ""
+	}
+	return string(data)
+}
+
+func (fc *FileContent) LastModified() string {
+
+	file := fc.FilePointer
+	filestat, err := file.Stat()
+	if err != nil {
+		return ""
+	}
+	timee := filestat.ModTime()
+	dateTime := timee.Format("2006-01-02 15:04:05")
+	return dateTime
+}
+
+func (fc *FileContent) Name() string {
+
+	file := fc.FilePointer
+	filestat, err := file.Stat()
+	if err != nil {
+		return ""
+	}
+	return filestat.Name()
+}
+
+func (fc *FileContent) ModeN() string {
+	file := fc.FilePointer
+	filestat, err := file.Stat()
+	if err != nil {
+		return ""
+	}
+	modeNumeric := fmt.Sprintf("%04o", filestat.Mode().Perm())
+	return modeNumeric
+}
+
+func (fc *FileContent) ModeT() string {
+	file := fc.FilePointer
+	filestat, err := file.Stat()
+	if err != nil {
+		return ""
+	}
+	return filestat.Mode().String()
+}
+
+func (fc *FileContent) Size() int64 {
+
+	file := fc.FilePointer
+	filestat, err := file.Stat()
+	if err != nil {
+		return 0
+	}
+	return filestat.Size()
+}
+
+
+func GetFileContent(filePath string) (*FileContent, error) {
+
+	file, err := os.Open(filePath)
+	if err != nil {
+		return nil, err
+	}
+	//defer file.Close()
+	return &FileContent{FilePointer: file}, nil
+}
