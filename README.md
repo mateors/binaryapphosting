@@ -83,6 +83,15 @@ chown -R automan /var/www/vhosts/automan.biz/
 
 ## VPN Service
 [Pangolin](https://github.com/xitongsys/pangolin)
+[Softether](https://www.softether.org)
+[Golang Softether api](https://github.com/terassyi/go-softether-api)
+[Softeather Usage guide](https://github.com/yousseb/softether-server)
+[Softeather automation script](https://gist.github.com/amanjuman/6a40d20be7e04d9986ccca14e4a3d3b4)
+[Softeather source](https://github.com/SoftEtherVPN/SoftEtherVPN)
+
+## Tutorial
+[Digitalocean](https://www.digitalocean.com/community/tutorials/how-to-setup-a-multi-protocol-vpn-server-using-softether)
+[How to install & config](https://elixirnode.com/help/how-to-install-a-multi-protocol-vpn-server-on-ubuntu-20-04-vps-with-softether/)
 
 ## Parentral Control DNS
 [PcDNS](https://github.com/meggarr/pcdns)
