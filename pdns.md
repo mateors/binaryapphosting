@@ -75,3 +75,4 @@ clear-zone ZONE
 * https://registry.terraform.io/providers/pan-net/powerdns/latest/docs/resources/record
 * https://doc.powerdns.com/md/manpages/pdnsutil.1/
 * https://maddy.email/tutorials/setting-up/
+* https://www.howson.pro/dnssec-and-power-dns/
