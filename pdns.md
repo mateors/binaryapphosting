@@ -69,6 +69,7 @@ pdnsutil add-record mostain.com ns1.mostain.com. A 74.208.181.199
 clear-zone ZONE
 
 ## Resources
+* https://www.sidn.nl/en/dnssec/dnssec-on-the-powerdns-authoritative-server
 * https://doc.powerdns.com/md/manpages
 * https://bind9.readthedocs.io/en/latest/dnssec-guide.html#advanced-discussions-key-generation
 * https://registry.terraform.io/providers/pan-net/powerdns/latest/docs/resources/record
