@@ -1,5 +1,7 @@
 ## PowerDNS Utility Program
 
+* [DNS Record format](https://registry.terraform.io/providers/pan-net/powerdns/latest/docs)
+
 # pdnsutil --version
 > pdnsutil 4.2.1
 
@@ -71,3 +73,4 @@ clear-zone ZONE
 * https://doc.powerdns.com/md/manpages
 * https://bind9.readthedocs.io/en/latest/dnssec-guide.html#advanced-discussions-key-generation
 * https://registry.terraform.io/providers/pan-net/powerdns/latest/docs/resources/record
+* https://doc.powerdns.com/md/manpages/pdnsutil.1/
