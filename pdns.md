@@ -34,12 +34,6 @@ pdnsutil show-zone mostain.net
 #set-nsec3 ZONE ['HASH-ALGORITHM FLAGS ITERATIONS SALT']
 pdnsutil set-nsec3 mostain.net '1 0 1 ab'
 
-
-https://doc.powerdns.com/md/manpages
-
-https://bind9.readthedocs.io/en/latest/dnssec-guide.html#advanced-discussions-key-generation
-
-
 pdnsutil rectify-zone mostain.net
 
 pdnsutil set-publish-cdnskey mostain.net
@@ -49,7 +43,6 @@ pdnsutil activate-zone-key mostain.net 1
 pdnsutil activate-zone-key mostain.net 2
 
 pdnsutil check-zone mostain.net
-
 
 pdnsutil show-zone mostain.net
 
@@ -75,4 +68,7 @@ pdnsutil add-record mostain.com ns1.mostain.com. A 74.208.181.199
 
 clear-zone ZONE
 
-https://registry.terraform.io/providers/pan-net/powerdns/latest/docs/resources/record
+## Resources
+* https://doc.powerdns.com/md/manpages
+* https://bind9.readthedocs.io/en/latest/dnssec-guide.html#advanced-discussions-key-generation
+* https://registry.terraform.io/providers/pan-net/powerdns/latest/docs/resources/record
