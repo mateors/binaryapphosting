@@ -1,8 +1,7 @@
 ## PowerDNS Utility Program
 
-#pdnsutil --version
+# pdnsutil --version
 > pdnsutil 4.2.1
-
 
 # pdnsutil list-algorithms
 5 - RSASHA1
@@ -14,11 +13,10 @@
 15 - ED25519
 16 - ED448
 
-https://manpages.ubuntu.com/manpages/groovy/man1/pdnsutil.1.html
-pdnsutil add-zone-key example.nl KSK inactive ecdsa256
+* https://manpages.ubuntu.com/manpages/groovy/man1/pdnsutil.1.html
+> pdnsutil add-zone-key example.nl KSK inactive ecdsa256
 
-pdnsutil list-keys mostain.net
-Arisha32Most@#
+> pdnsutil list-keys mostain.net
 
 https://www.sidn.nl/en/dnssec/dnssec-on-the-powerdns-authoritative-server
 
