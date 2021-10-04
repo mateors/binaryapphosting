@@ -74,3 +74,4 @@ clear-zone ZONE
 * https://bind9.readthedocs.io/en/latest/dnssec-guide.html#advanced-discussions-key-generation
 * https://registry.terraform.io/providers/pan-net/powerdns/latest/docs/resources/record
 * https://doc.powerdns.com/md/manpages/pdnsutil.1/
+* https://maddy.email/tutorials/setting-up/
