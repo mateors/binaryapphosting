@@ -77,7 +77,8 @@ mDNS or Multicast DNS can be used to discover services on the local network with
 
 ## Postgrey [Greylisting](https://github.com/schweikert/postgrey)
 > Greylisting in short means that when someone wants to deliver a mail to your mail server it will simply reply -Please come back later-?. That is something all RFC-compliant mail servers do and when they do come back the mail is accepted. Most spammers and spam software are not compliant and not patient enough to try again. You will be surprised to see how effective this is. 
-> https://www.vpnreactor.com/greylisting-org-acquistion/
+
+* https://www.vpnreactor.com/greylisting-org-acquistion/
 
 ## Email Client
 * [Server Maddy](https://brianlovin.com/hn/27557542)
@@ -98,14 +99,14 @@ mDNS or Multicast DNS can be used to discover services on the local network with
 * [Softeather source](https://github.com/SoftEtherVPN/SoftEtherVPN)
 
 ## Tutorial
-[Digitalocean](https://www.digitalocean.com/community/tutorials/how-to-setup-a-multi-protocol-vpn-server-using-softether)
-[How to install & config](https://elixirnode.com/help/how-to-install-a-multi-protocol-vpn-server-on-ubuntu-20-04-vps-with-softether/)
+* [Digitalocean](https://www.digitalocean.com/community/tutorials/how-to-setup-a-multi-protocol-vpn-server-using-softether)
+* [How to install & config](https://elixirnode.com/help/how-to-install-a-multi-protocol-vpn-server-on-ubuntu-20-04-vps-with-softether/)
 
 ## Parentral Control DNS
-[PcDNS](https://github.com/meggarr/pcdns)
+* [PcDNS](https://github.com/meggarr/pcdns)
 
 ## Ad Blocker 
-[Blocky](https://github.com/0xERR0R/blocky)
+* [Blocky](https://github.com/0xERR0R/blocky)
 
 ## WebRTC
  > Distributed real-time communication system, the goal is to chat anydevice, anytime, anywhere
