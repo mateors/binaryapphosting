@@ -64,17 +64,9 @@ pdnsutil add-record sylhetuniversity.com. www. A 3600 "74.208.181.199"
 #pdnsutil add-record sylhetuniversity.com. www.sylhetuniversity.com. A "74.208.181.199"
 
 
-
-
 pdnsutil check-zone sylhetuniversity.com
 
 pdnsutil add-record sylhetuniversity.com. www. A 3600 "74.208.181.199"
-
-
-
-
-
-
 
 
 19 |         3 | sylhetuniversity.com                          | SOA  | a.misconfigured.powerdns.server hostmaster.sylhetuniversity.com 1 10800 3600 604800 3600 | 3600 |    0 |        0 | NULL                             |    1 |
@@ -88,7 +80,6 @@ pdnsutil rectify-zone sylhetuniversity.com.
 
 pdnsutil add-record ZONE NAME TYPE [TTL] CONTENT
 pdnsutil add-record sylhetuniversity.com. ns1 NS 74.208.181.199
-
 
 pdnsutil delete-rrset sylhetuniversity.com. ns1 NS
 
@@ -121,6 +112,8 @@ mkdir -p /var/www/sylhetuniversity.com
 ls -ld /var/www/sylhetuniversity.com
 
 chown sylhetuniv /var/www/sylhetuniversity.com/public_html/
+
+chown -R sylhetuniv /var/www/sylhetuniversity.com/public_html/
 
 usermod -d /var/www/sylhetuniversity.com/ sylhetuniv
 
