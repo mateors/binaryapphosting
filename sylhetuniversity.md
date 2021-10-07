@@ -120,3 +120,6 @@ usermod -s /bin/false sylhetuniv
 nano /etc/ssh/sshd_config
 
 service sshd restart
+
+## pdnsutil 
+* [Tutorial of pdnstl](https://gist.github.com/ahupowerdns/38932960414f02c786f7)
