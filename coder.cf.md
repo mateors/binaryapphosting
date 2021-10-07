@@ -67,3 +67,6 @@ usermod -d /var/www/coder.cf/ coder
 usermod -s /bin/false coder
 
 chown -R coder /var/www/coder.cf/public_html/
+
+## Installing php version 5.6
+> sudo apt install -y php5.6
