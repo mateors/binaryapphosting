@@ -214,3 +214,5 @@ In case of the root directive, full path is appended to the root including the l
 
 ## how-do-i-save-terminal-output-to-a-file?
 * https://askubuntu.com/questions/420981/how-do-i-save-terminal-output-to-a-file
+
+> $SHELL --version
