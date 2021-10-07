@@ -46,3 +46,22 @@ server {
 
 ## Restart nginx
 > systemctl restart nginx
+
+## SFTP Account creation
+
+> useradd coder
+
+> passwd coder
+M$d3R2021
+
+usermod -g sftponly coder && usermod -G sftponly coder
+
+mkdir -p /var/www/coder.cf
+
+ls -ld /var/www/coder.cf
+
+chown coder /var/www/coder.cf/public_html/
+
+usermod -d /var/www/coder.cf/ coder
+
+usermod -s /bin/false coder
