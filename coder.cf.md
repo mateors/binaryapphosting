@@ -52,7 +52,7 @@ server {
 > useradd coder
 
 > passwd coder
-M$d3R2021
+> M$d3R2021
 
 usermod -g sftponly coder && usermod -G sftponly coder
 
@@ -65,3 +65,5 @@ chown coder /var/www/coder.cf/public_html/
 usermod -d /var/www/coder.cf/ coder
 
 usermod -s /bin/false coder
+
+chown -R coder /var/www/coder.cf/public_html/
