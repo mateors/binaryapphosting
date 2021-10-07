@@ -216,3 +216,7 @@ In case of the root directive, full path is appended to the root including the l
 * https://askubuntu.com/questions/420981/how-do-i-save-terminal-output-to-a-file
 
 > $SHELL --version
+
+### tee is useful if you want to be able to capture command output while also viewing it live. 
+> command |& tee ~/outputfile.txt \
+> ls -la |& tee ~/outputfile.txt \
