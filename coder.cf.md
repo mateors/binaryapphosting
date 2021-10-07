@@ -17,18 +17,15 @@ pdnsutil add-record coder.cf "www" A "74.208.181.199"
 pdnsutil check-zone coder.cf
 
 ## Step-2
-nginx virtual hosting configuration
+> nginx virtual hosting configuration
 
 sudo mkdir -p /var/www/coder.cf/public_html
-
-sudo chown -R $USER:$USER /var/www/coder.cf/public_html
-
-sudo chown -R nginx:nginx /var/www/coder.cf/public_html
 
 nano /var/www/coder.cf/public_html/index.html
 
 nano /etc/nginx/sites-available/coder.cf.conf
 
+```
 server {
 
 	listen 80;
@@ -43,3 +40,4 @@ server {
 		try_files $uri $uri/ =404;
 	}
 }
+```
