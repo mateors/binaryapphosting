@@ -69,4 +69,11 @@ usermod -s /bin/false coder
 chown -R coder /var/www/coder.cf/public_html/
 
 ## Installing php version 5.6
+> sudo apt install software-properties-common \
+> sudo add-apt-repository ppa:ondrej/nginx-mainline \
+> sudo apt update
+
 > sudo apt install -y php5.6
+
+## Check php version
+> php -v
