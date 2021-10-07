@@ -92,7 +92,6 @@ pdnsutil add-record sylhetuniversity.com. ns1 NS 74.208.181.199
 
 pdnsutil delete-rrset sylhetuniversity.com. ns1 NS
 
-
 pdnsutil create-zone sylhetuniversity.com ns1.sylhetuniversity.com
 
 
@@ -108,7 +107,6 @@ pdnsutil add-record sylhetuniversity.com "" A 74.208.181.199
 pdnsutil add-record sylhetuniversity.com www A 74.208.181.199
 
 pdnsutil list-zone sylhetuniversity.com
-
 
 groupadd sftponly
 useradd sylhetuniv
@@ -128,12 +126,6 @@ usermod -d /var/www/sylhetuniversity.com/ sylhetuniv
 
 usermod -s /bin/false sylhetuniv
 
-
 nano /etc/ssh/sshd_config
 
 service sshd restart
-
-user: sylhetuniv
-pass: $ylhetUn!2021
-host: sylhetuniversity.com
-port: 22
