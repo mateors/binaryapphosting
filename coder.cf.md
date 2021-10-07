@@ -52,7 +52,6 @@ server {
 > useradd coder
 
 > passwd coder
-> M$d3R2021
 
 usermod -g sftponly coder && usermod -G sftponly coder
 
