@@ -211,3 +211,6 @@ https://stackoverflow.com/questions/10631933/nginx-static-file-serving-confusion
 There is a very important difference between the root and the alias directives. This difference exists in the way the path specified in the root or the alias is processed.
 
 In case of the root directive, full path is appended to the root including the location part, whereas in case of the alias directive, only the portion of the path NOT including the location part is appended to the alias.
+
+## how-do-i-save-terminal-output-to-a-file?
+* https://askubuntu.com/questions/420981/how-do-i-save-terminal-output-to-a-file
