@@ -77,3 +77,6 @@ chown -R coder /var/www/coder.cf/public_html/
 
 ## Check php version
 > php -v
+
+## Reference
+* [PHP 5.6 installation guide](https://tecadmin.net/install-php-ubuntu-20-04)
