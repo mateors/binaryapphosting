@@ -22,7 +22,7 @@ nano /var/www/sylhetuniversity.com/public_html/index.html
 
 nano /etc/nginx/sites-available/sylhetuniversity.com.conf
 
-
+```
 server {
 
 	listen 80;
@@ -37,16 +37,14 @@ server {
 		try_files $uri $uri/ =404;
 	}
 }
-
+```
 
 
 sudo ln -s /etc/nginx/sites-available/sylhetuniversity.com.conf /etc/nginx/sites-enabled/
 
 
-systemctl restart nginx
-service nginx retstart
-
-
+> systemctl restart nginx
+> service nginx retstart
 
 
 pdnsutil add-record ZONE NAME TYPE [TTL] CONTENT
@@ -103,7 +101,7 @@ groupadd sftponly
 useradd sylhetuniv
 
 passwd sylhetuniv
-$ylhetUn!2021
+*****
 
 usermod -g sftponly sylhetuniv && usermod -G sftponly sylhetuniv
 
