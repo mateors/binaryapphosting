@@ -41,3 +41,5 @@ server {
 	}
 }
 ```
+
+> sudo ln -s /etc/nginx/sites-available/coder.cf.conf /etc/nginx/sites-enabled/
