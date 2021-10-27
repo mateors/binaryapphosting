@@ -13,8 +13,8 @@ Enter the password
 > mteorsA2021
 
 ## Add user into a group
-> usermod -G <groupName> <userName>
-> #usermod -g sftponly automan
+> usermod -G <groupName> <userName> \
+> #usermod -g sftponly automan \
 > ```usermod -G sftponly automan```
 
 ## Check the user and group added or not
@@ -44,7 +44,7 @@ chown automan /home/mastererp/automan.biz/www/
   
 ```
 # override default of no subsystems
-#Subsystem      sftp    /usr/libexec/openssh/sftp-server
+#Subsystem      sftp    /usr/libexec/openssh/sftp-server\
 Subsystem sftp internal-sftp
 
 # For sftp user only
