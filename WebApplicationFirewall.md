@@ -7,6 +7,7 @@
  ## Golang WAF
  * https://github.com/jptosso/coraza-waf
  
+ ## Get to know about Web application firewall
 * https://github.com/EnableSecurity/wafw00f
 * https://owasp.org/www-pdf-archive//Best_Practices_Guide_WAF_v104.en.pdf
 * https://owasp.org/www-pdf-archive/Intro-WebApplicationFirewalls.pdf
