@@ -104,3 +104,6 @@ ACCOUNT_NAME="mostain"
 VPN_HOST_IPv4="139.59.9.243"
 LOCAL_GATEWAY="192.168.0.1"
 ```
+
+## Resource
+* [vpn-server-on-ubuntu-20-04](https://cloudinfrastructureservices.co.uk/how-to-install-softether-vpn-server-on-ubuntu-20-04)
