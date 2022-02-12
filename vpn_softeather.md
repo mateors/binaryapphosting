@@ -109,3 +109,4 @@ LOCAL_GATEWAY="192.168.0.1"
 * [vpn-server-on-ubuntu-20-04](https://cloudinfrastructureservices.co.uk/how-to-install-softether-vpn-server-on-ubuntu-20-04)
 * [softether systemd](https://blog.yasithab.com/ubuntu/install-softether-vpn-on-ubuntu-1604)
 * [Video tutorial Creating scripts to start and stop VPN Client](https://www.youtube.com/watch?v=i2zN1IFKNYU)
+* [softether-vpn-client-on-linux](https://anuradha-15.medium.com/installation-guide-of-softether-vpn-client-on-linux-54a405a0ae2c)
