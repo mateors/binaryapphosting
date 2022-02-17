@@ -1,6 +1,8 @@
 # Softeather VPN
 > ssh root@139.59.9.243
 
+> ssh -i /home/rezaul/github root@139.59.9.243
+
 ## Server Installation
 > apt-get update -y
 
