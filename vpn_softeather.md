@@ -95,6 +95,14 @@ exit 0
 > wget https://raw.githubusercontent.com/mfaizanse/intellexlab-files/main/softether-vpn-client/vpn-disconnect.sh \
 > wget https://raw.githubusercontent.com/mfaizanse/intellexlab-files/main/softether-vpn-client/vpn_config
 
+## Connecting to VPN
+> sudo ip route add 139.59.9.243/32 via 192.168.0.1
+
+> sudo ip route del default via 192.168.0.1
+
+> sudo netstat -rn
+
+> sudo dhclient vpn_nic
 
 ```bash
 sudo apt -f install
